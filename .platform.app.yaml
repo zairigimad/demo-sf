@@ -6,7 +6,7 @@ dependencies:
     php:
         composer/composer: "^2"
     nodejs:
-        n: "14"
+        n: "*"
 runtime:
     extensions:
         - apcu
