@@ -1,0 +1,44 @@
+name: app
+
+type: php:7
+
+runtime:
+    extensions:
+        
+
+#variables:
+#    php:
+#        # uncomment on PHP 7.4+
+#        #opcache.preload: config/preload.php
+
+build:
+    flavor: none
+
+disk: 512
+
+web:
+    locations:
+        "/":
+            root: "public"
+            expires: 1h
+            passthru: "/index.php"
+
+
+
+mounts:
+    "/var": { source: local, source_path: var }
+    "/data": { source: local, source_path: "data" }
+
+hooks:
+    build: |
+        set -x -e
+
+        curl -fs https://get.symfony.com/cloud/configurator | bash
+        # php-ext-install pdo_sqlite X.Y.Z
+        
+        NODE_VERSION=18 symfony-build
+
+    deploy: |
+        set -x -e
+
+        symfony-deploy
