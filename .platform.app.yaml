@@ -5,6 +5,8 @@ type: php:8.1
 dependencies:
     php:
         composer/composer: "^2"
+    nodejs:
+        n: "14"
 runtime:
     extensions:
         - apcu
